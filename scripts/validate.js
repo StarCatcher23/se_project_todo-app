@@ -17,13 +17,13 @@ const hideInputError = (formElement, inputElement, settings) => {
 const checkInputValidity = (formElement, inputElement, settings) => {
   if (!inputElement.validity.valid) {
     showInputError(
-      formElement,
+      formEl,
       inputElement,
       inputElement.validationMessage,
-      settings,
+      settings
     );
   } else {
-    hideInputError(formElement, inputElement, settings);
+    hideInputError(formEl, inputElement, settings);
   }
 };
 
@@ -45,28 +45,38 @@ const toggleButtonState = (inputList, buttonElement, settings) => {
 
 const setEventListeners = (formElement, settings) => {
   const inputList = Array.from(
-    formElement.querySelectorAll(settings.inputSelector),
+    formElement.querySelectorAll(settings.inputSelector)
   );
   const buttonElement = formElement.querySelector(
-    settings.submitButtonSelector,
+    settings.submitButtonSelector
   );
 
   toggleButtonState(inputList, buttonElement, settings);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      checkInputValidity(formElement, inputElement, settings);
+      checkInputValidity(formEl, inputElement, settings);
       toggleButtonState(inputList, buttonElement, settings);
     });
   });
 };
 
+const settings = {
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit",
+  errorClass: "form__error_visible",
+  inputErrorClass: "form__input_type_error",
+  inactiveButtonClass: "form__submit_disabled",
+};
+
+const formEl = document.querySelector(".form"); // Make sure your HTML has this form
+
 const enableValidation = (settings) => {
-  const formElement = document.querySelector(settings.formSelector);
-  formElement.addEventListener("submit", (evt) => {
+  const formEl = document.querySelector(settings.formSelector);
+  formEl.addEventListener("submit", (evt) => {
     evt.preventDefault();
   });
-  setEventListeners(formElement, settings);
+  setEventListeners(formEl, settings);
 };
 
 enableValidation(validationConfig);

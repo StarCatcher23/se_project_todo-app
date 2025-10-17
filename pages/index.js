@@ -23,6 +23,7 @@ const closeModal = (modal) => {
 const generateTodo = (data) => {
   const todo = new Todo(data, "#todo-template");
   const todoElement = todo.getView();
+  console.log(todoElement);
   return todoElement;
   //To be removed:
   //   const todoElement = todoTemplate.content
