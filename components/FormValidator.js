@@ -1,7 +1,4 @@
-//create class
 class FormValidator {
-  //create constructor
-  //specify the parameters
   constructor(settings, formEl) {
     this._inputSelector = settings.inputSelector;
     this._formSelector = settings.formSelector;
@@ -13,13 +10,7 @@ class FormValidator {
     this._settings = settings;
   }
 
-  //TODO-implement all the other methods
-
   _checkInputValidity(inputElement) {
-    //(1)TODO implement this medthod
-    //(a) copy body of existing function
-    //(b) work through errors in console as we did for enable validation
-
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {
@@ -27,7 +18,6 @@ class FormValidator {
     }
   }
 
-  // ✅ These helper methods need to be defined inside the class
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formEl.querySelector(
       `#${inputElement.id}-error`
@@ -50,13 +40,9 @@ class FormValidator {
     this._inputList = Array.from(
       this._formEl.querySelectorAll(this._inputSelector)
     );
-    console.log("success");
-    //TODO-finish impelementing _seteventlisteners
     const buttonElement = this._formEl.querySelector(
       this._submitButtonSelector
     );
-    // settings.submitButtonSelector
-    //);
 
     this._toggleButtonState(this._inputList, buttonElement);
 
@@ -87,6 +73,22 @@ class FormValidator {
       evt.preventDefault();
     });
     this._setEventListeners();
+  }
+
+  // ✅ FIXED: resetValidation is now inside the class
+  resetValidation() {
+    const inputList = Array.from(
+      this._formEl.querySelectorAll(this._inputSelector)
+    );
+
+    inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+
+    const buttonElement = this._formEl.querySelector(
+      this._submitButtonSelector
+    );
+    this._toggleButtonState(inputList, buttonElement);
   }
 }
 
