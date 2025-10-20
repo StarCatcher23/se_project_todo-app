@@ -1,4 +1,3 @@
-const errorElementId = `#${inputElement.id}-error`;
 const errorElement = formElement.querySelector(errorElementId);
 
 inputElement.classList.add(settings.inputErrorClass);
