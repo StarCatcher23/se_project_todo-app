@@ -11,26 +11,20 @@ const addTodoForm = addTodoPopupEl.querySelector(".popup__form");
 const addTodoCloseBtn = addTodoPopupEl.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
 
-const addTodoPop = new PopupWithForm({
+const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
   handleFormSubmit: () => {},
 });
 
-//const openModal = (modal) => {
-//  modal.classList.add("popup_visible");
-//};
-
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
+addTodoPopup.setEventListeners();
 
 addTodoButton.addEventListener("click", () => {
-  addTodoPop.open();
+  addTodoPopup.open();
 });
 
-addTodoCloseBtn.addEventListener("click", () => {
-  closeModal(addTodoPopupEl);
-});
+// addTodoCloseBtn.addEventListener("click", () => {
+//   addTodoPopup.close();
+// });
 
 // The logic in this function should all be handled in the Todo class.
 const generateTodo = (data) => {
@@ -46,6 +40,7 @@ const section = new Section({
     const todo = generateTodo(item); // create the DOM element
     section.addItem(todo); // use the class method to add it
   },
+
   containerSelector: ".todos__list",
 });
 
@@ -56,21 +51,23 @@ const renderTodo = (item) => {
   todosList.append(todo);
 };
 
-addTodoForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  const name = evt.target.name.value;
-  const dateInput = evt.target.date.value;
+// addTodoForm.addEventListener("submit", (evt) => {
+//   evt.preventDefault();
+//   const name = evt.target.name.value;
+//   const dateInput = evt.target.date.value;
 
-  const date = new Date(dateInput);
-  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+//   const date = new Date(dateInput);
+//   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
 
-  const id = uuidv4();
-  const values = { name, date, id };
+//   const id = uuidv4();
+//   const values = { name, date, id };
 
-  renderTodo(values);
-  newTodoValidator.resetValidation();
-  closeModal(addTodoPopupEl);
-});
+//   renderTodo(values);
+
+//   newTodoValidator.resetValidation();
+
+//   addTodoPop.close();
+// });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
 
