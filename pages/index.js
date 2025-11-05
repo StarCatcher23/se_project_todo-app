@@ -16,13 +16,21 @@ const addTodoPop = new PopupWithForm({
   handleFormSubmit: () => {},
 });
 
-const openModal = (modal) => {
-  modal.classList.add("popup_visible");
-};
+//const openModal = (modal) => {
+//  modal.classList.add("popup_visible");
+//};
 
 const closeModal = (modal) => {
   modal.classList.remove("popup_visible");
 };
+
+addTodoButton.addEventListener("click", () => {
+  addTodoPop.open();
+});
+
+addTodoCloseBtn.addEventListener("click", () => {
+  closeModal(addTodoPopupEl);
+});
 
 // The logic in this function should all be handled in the Todo class.
 const generateTodo = (data) => {
@@ -47,14 +55,6 @@ const renderTodo = (item) => {
   const todo = generateTodo(item);
   todosList.append(todo);
 };
-
-addTodoButton.addEventListener("click", () => {
-  openModal(addTodoPopupEl);
-});
-
-addTodoCloseBtn.addEventListener("click", () => {
-  closeModal(addTodoPopupEl);
-});
 
 addTodoForm.addEventListener("submit", (evt) => {
   evt.preventDefault();

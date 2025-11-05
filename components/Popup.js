@@ -4,5 +4,10 @@ class Popup {
     console.log("=============================");
     console.log(this._popupElement);
   }
+
+  open() {
+    this._popupElement.classList.add("popup_visible");
+  }
 }
+
 export default Popup;
