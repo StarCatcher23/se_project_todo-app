@@ -17,6 +17,7 @@ const generateTodo = (data) => {
   return todoElement;
 };
 
+//public method named addItem() that takes a DOM element and adds it to the container. This method should be called when adding an individual card to the DOM.
 const section = new Section({
   items: initialTodos, // your array of to-do items
   renderer: (item) => {
