@@ -9,6 +9,7 @@ class Section {
   renderItems() {
     this._items.forEach((item) => this._renderer(item)); //public method named renderItems() that renders all elements on the page. It should iterate through the items array and call the renderer() function on each item.
   }
+
   //public method named addItem() that takes a DOM element and adds it to the container. This method should be called when adding an individual card to the DOM.
   addItem(element) {
     this._container.appendChild(element);
