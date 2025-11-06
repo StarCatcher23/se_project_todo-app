@@ -13,7 +13,23 @@ const todosList = document.querySelector(".todos__list");
 
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
-  handleFormSubmit: () => {},
+  handleFormSubmit: (inputValues) => {
+    const name = inputValues.name;
+    const dateInput = inputValues.date;
+
+    const date = new Date(dateInput);
+    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+
+    const id = uuidv4();
+    const values = { name, date, id };
+
+    renderTodo(values);
+    newTodoValidator.resetValidation();
+    addTodoPopup.close();
+
+    console.log(name);
+    console.log(dateInput);
+  },
 });
 
 addTodoPopup.setEventListeners();
@@ -27,6 +43,10 @@ const generateTodo = (data) => {
 
 addTodoButton.addEventListener("click", () => {
   addTodoPopup.open();
+});
+
+addTodoCloseBtn.addEventListener("click", () => {
+  addTodoPopup.close();
 });
 
 //public method named addItem() that takes a DOM element and adds it to the container. This method should be called when adding an individual card to the DOM.
@@ -46,24 +66,6 @@ const renderTodo = (item) => {
   const todo = generateTodo(item);
   todosList.append(todo);
 };
-
-// addTodoForm.addEventListener("submit", (evt) => {
-//   evt.preventDefault();
-//   const name = evt.target.name.value;
-//   const dateInput = evt.target.date.value;
-
-//   const date = new Date(dateInput);
-//   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-
-//   const id = uuidv4();
-//   const values = { name, date, id };
-
-//   renderTodo(values);
-
-//   newTodoValidator.resetValidation();
-
-//   addTodoPop.close();
-// });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
 
