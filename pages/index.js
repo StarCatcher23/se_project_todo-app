@@ -18,20 +18,16 @@ const addTodoPopup = new PopupWithForm({
 
 addTodoPopup.setEventListeners();
 
-addTodoButton.addEventListener("click", () => {
-  addTodoPopup.open();
-});
-
-// addTodoCloseBtn.addEventListener("click", () => {
-//   addTodoPopup.close();
-// });
-
 // The logic in this function should all be handled in the Todo class.
 const generateTodo = (data) => {
   const todo = new Todo(data, "#todo-template");
   const todoElement = todo.getView();
   return todoElement;
 };
+
+addTodoButton.addEventListener("click", () => {
+  addTodoPopup.open();
+});
 
 //public method named addItem() that takes a DOM element and adds it to the container. This method should be called when adding an individual card to the DOM.
 const section = new Section({
