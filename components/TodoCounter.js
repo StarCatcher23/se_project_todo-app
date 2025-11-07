@@ -14,11 +14,14 @@ class TodoCounter {
     this._updateText();
   }
 
-  updateCompleted = (increment) => {
-    this._completed += increment ? 1 : -1;
-    this._completed = Math.max(0, this._completed); // prevent negative count
-    this._updateText();
-  };
+  updateCompleted(increment) {
+    if (increment) {
+      this._completedCount++;
+    } else {
+      this._completedCount--; // Add this else clause!
+    }
+    this._updateDisplay();
+  }
 
   updateTotal = (increment) => {
     this._total += increment ? 1 : -1;

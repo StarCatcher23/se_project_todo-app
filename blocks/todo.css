@@ -70,6 +70,16 @@
   cursor: pointer;
 }
 
+.todo__delete-btn:hover {
+  opacity: 0.7; /* Subtle fade effect */
+  /* OR */
+  color: #ff4444; /* Change to red on hover */
+  /* OR */
+  background-color: #f0f0f0; /* Light background */
+  /* OR */
+  transform: scale(1.05); /* Slightly larger */
+}
+
 .todo__delete-btn::before {
   content: "Delete";
 }

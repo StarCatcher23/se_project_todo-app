@@ -1,5 +1,3 @@
-const errorElement = formElement.querySelector(errorElementId);
-
 inputElement.classList.add(settings.inputErrorClass);
 
 if (errorElement) {

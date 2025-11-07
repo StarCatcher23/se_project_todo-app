@@ -36,7 +36,7 @@ const addTodoPopup = new PopupWithForm({
 addTodoPopup.setEventListeners();
 
 function handleCheck(isNowCompleted) {
-  todoCounter.updateCompleted(isNowCompleted ? 1 : -1);
+  todoCounter.updateCompleted(isNowCompleted); // Pass boolean directly!
 }
 
 function handleDelete(wasCompleted) {
@@ -75,7 +75,7 @@ section.renderItems();
 
 const renderTodo = (item) => {
   const todo = generateTodo(item);
-  todosList.append(todo);
+  section.addItem(todo); // ← Use Section's method instead
 };
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
