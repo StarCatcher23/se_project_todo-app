@@ -24,22 +24,31 @@ const addTodoPopup = new PopupWithForm({
     date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
 
     const id = uuidv4();
-    const values = { name, date, id };
+    const values = { name, date, id, completed: false };
 
     renderTodo(values);
+    todoCounter.updateTotal(true); // increment total count
     newTodoValidator.resetValidation();
     addTodoPopup.close();
-
-    console.log(name);
-    console.log(dateInput);
   },
 });
 
 addTodoPopup.setEventListeners();
 
+function handleCheck(isNowCompleted) {
+  todoCounter.updateCompleted(isNowCompleted ? 1 : -1);
+}
+
+function handleDelete(wasCompleted) {
+  todoCounter.updateTotal(false); // decrement total count
+  if (wasCompleted) {
+    todoCounter.updateCompleted(false); // decrement completed count
+  }
+}
+
 // The logic in this function should all be handled in the Todo class.
 const generateTodo = (data) => {
-  const todo = new Todo(data, "#todo-template");
+  const todo = new Todo(data, "#todo-template", handleCheck, handleDelete);
   const todoElement = todo.getView();
   return todoElement;
 };
@@ -52,18 +61,17 @@ addTodoCloseBtn.addEventListener("click", () => {
   addTodoPopup.close();
 });
 
-//public method named addItem() that takes a DOM element and adds it to the container. This method should be called when adding an individual card to the DOM.
+// Section handles rendering initial todos
 const section = new Section({
-  items: initialTodos, // your array of to-do items
+  items: initialTodos,
   renderer: (item) => {
-    const todo = generateTodo(item); // create the DOM element
-    section.addItem(todo); // use the class method to add it
+    const todo = generateTodo(item);
+    section.addItem(todo);
   },
-
   containerSelector: ".todos__list",
 });
 
-section.renderItems(); // Call this once on page load
+section.renderItems();
 
 const renderTodo = (item) => {
   const todo = generateTodo(item);
@@ -71,5 +79,4 @@ const renderTodo = (item) => {
 };
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
-
 newTodoValidator.enableValidation();
