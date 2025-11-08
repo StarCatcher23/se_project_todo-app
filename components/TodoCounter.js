@@ -16,11 +16,11 @@ class TodoCounter {
 
   updateCompleted(increment) {
     if (increment) {
-      this._completedCount++;
+      this._completed++;
     } else {
-      this._completedCount--; // Add this else clause!
+      this._completed--;
     }
-    this._updateDisplay();
+    this._updateText(); // ← Use the method that exists!
   }
 
   updateTotal = (increment) => {
@@ -28,7 +28,6 @@ class TodoCounter {
     this._total = Math.max(0, this._total); // prevent negative count
     this._updateText();
   };
-
   _updateText() {
     if (this._element) {
       this._element.textContent = `Showing ${this._completed} out of ${this._total} completed`;
